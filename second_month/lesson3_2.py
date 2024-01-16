@@ -1,68 +1,80 @@
-# ООП Наследование полиморфизм
-# Инкапсуляцию
-#
-class Hum(object):  # супер класс - родительский класс
-    # магический метод
-    def __init__(self, name):
-        self.name = name
-        # self.age=age
+# полиморфизм наследование
+# инкапсуляция
+# 1 - открытый  2 - защищенный 3 - скрытый
+class Student:
+    time = True
 
-    # метод
-    def Hi(self): ...
-
-    def __str__(self):
-        return 'HI'
-
-    def __len__(self):
-        return len(self)
+    def __init__(self, mark, id):
+        self.id = id
+        self.mark = mark
 
 
-# экземпляр\обьект
-h = Hum('sdfg')
-h.name = 'beka'
-h.Hi()
+s1 = Student(10, 12)
 
 
-class Student(Hum):  # дочерний класс
-    # def __
+class Human(Student):
+    def __init__(self, mark, id, timesleep, name):
+        super().__init__(mark, id)
+        self.__times = timesleep
+        self._name = name
 
-    def Hi(self):
-        print('Hello ', self.name)
-
-
-student = Student('beka')
-student.Hi()
-
-print(Student.mro())
-
-
-class Kid(Student):
-    def __init__(self, name, age, lastname):
-        # super().__init__(name)
-        Student.__init__(self, name)
-        self.age = age
-        self.last = lastname
-
-    def Hi(self):
-        Hum.Hi(self)
-
-
-c = Kid('Beka', 14, 'DZU')
-
-c.Hi()
-
-
-class Kid2(Kid):
-    def __init__(self, name, age, lastname, fly=False):
-        super().__init__(name, age, lastname)
-        self.fly = fly
+    time = False
 
     def __str__(self):
-        return f"{super().__str__()}, " \
-                f"name: {self.name}, age: {self.age}," \
-                f" latname: {self.last}, can fly: {self.fly}"
+        return f'{self.id} {self.mark} {self.time} {self._name}'
+
+    def _stop(self):
+        print('stop')
+
+    def __none(self):
+        print('extra stop')
 
 
-kid = Kid2('beka', 11, 'wer', False)
+s2 = Human(10, 1, False, 'Данияр')
+print(s2)
 
-print(kid)
+s2.id = 32
+s2._name = 'name'
+print(s2._name)
+print(s2)
+
+s2.__time = 1
+s2._stop()
+print(dir(Human))
+
+s2._Human__none()
+print(s2._Human__times)
+
+
+class Obj:
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def __run(self):
+        print(f'{self.__name} running')
+
+    def run(self):
+        self.__run()
+
+    @property
+    def name(self):
+        return f'{self.__name}'
+
+    @name.setter
+    def name(self, a):
+        self.__name = a
+
+    def get_obj(self):
+        return f'{self.__name}'
+    def set_obj(self, a):
+        self.__name = a
+
+
+s11 = Obj('Бе ктур', 18)
+s11.name = 'Бектур'
+print(s11.name)
+
+s11.set_obj('Бектур')
+print(s11.get_obj())
+
